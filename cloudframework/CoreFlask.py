@@ -8,7 +8,7 @@ is_string = lambda var: isinstance(var, (str))
 class CoreFlask():
     """
     """
-    version = '1.0.6'
+    version = '1.0.7'
     _p = None           # CorePerformance
     session = None      # CoreSession
     system = None       # CoreSystem
@@ -499,9 +499,9 @@ class CoreIs:
     def __init__(self):
         pass
     def development(self):
-        return not(os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/'))
+        return os.getenv('GAE_ENV','') == ''
     def production(self):
-        return os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/')
+        return os.getenv('GAE_ENV','') != ''
     def terminal(self):
         return not('REMOTE_ADDR' in os.environ)
 
