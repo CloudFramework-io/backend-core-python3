@@ -36,7 +36,8 @@ class CoreFlask():
 
         self.security = CoreSecurity(self)
 #        self.user = CoreUser(self)
-        self.config = CoreConfig(self,os.path.dirname(__file__)+'/config.json')
+        self.config_file = self.system.root_path+'/config.json' if os.path.isfile(self.system.root_path+'/config.json') else ""
+        self.config = CoreConfig(self,self.config_file)
 #         self.request = CoreRequest(self)
 #         self.localization = CoreLocalization(self)
 #         self.model = CoreModel(self)
@@ -231,7 +232,10 @@ class CoreConfig():
 
         # read file of configuration
         if file:
-            self.readConfigJSONFile(file)
+            if os.path.isfile(file):
+                self.readConfigJSONFile(file)
+            else:
+                self.core.logs.add("the following config file does not exist: "+file)
 
         # process special tags
         if(self.get('core_default_lang')):

@@ -44,7 +44,7 @@ pip install cloudframework
 
 copy the basic files to start working with your APIs developed in python
 ```
-cp env/lib/python3.9/site-packages/cloudframework/python-dist/main .
+cp env/lib/python3.9/site-packages/cloudframework/python-dist/main.py .
 ```
 
 Now you have the following structure of files:
