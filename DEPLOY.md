@@ -43,4 +43,5 @@ The first line runs the setup.py script and creates a wheel distribution package
 The second line uploads your library to the pip server.
 
 ## Thank you to ..
+* [python-packaging](https://python-packaging.readthedocs.io/en/latest/dependencies.html)
 * [@pietrassyk](https://medium.com/@pietrassyk) for his manual about [building pip libraries](https://medium.com/@pietrassyk/building-a-custom-pip-library-for-python-fe618034d54a)

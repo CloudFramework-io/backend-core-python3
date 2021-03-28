@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="cloudframework",
-    version="1.0.3",
+    version="1.0.4",
     author="CloudFramework Team",
     author_email="tools@cloudframework.io",
     description="CloudFramework for Appengine using python language.",
@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/CloudFramework-io/appengine-python-core-3.9",
     packages=setuptools.find_packages(),
+    install_requires=[
+        'Flask==1.1.2','psutil'
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
