@@ -6,9 +6,8 @@ class API(RESTFul):
 
         self.core.logs.add({'a':4,'b':5})
         res = {
-            "version": self.core.version,
-            "is_development": self.core.isThis.development(),
-            "is_production": self.core.isThis.production(),
+            "self.core.version": self.core.version,
+            "self.core.isThis.development()": self.core.isThis.development(),
+            "self.core.isThis.production()": self.core.isThis.production(),
         }
-        print(os.environ)
         self.addReturnData(res)

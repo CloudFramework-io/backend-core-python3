@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="cloudframework",
-    version="1.0.7",
+    version="1.0.8",
     author="CloudFramework Team",
     author_email="tools@cloudframework.io",
     description="CloudFramework for Appengine using python language.",
