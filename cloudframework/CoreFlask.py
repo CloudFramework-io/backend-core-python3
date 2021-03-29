@@ -8,7 +8,7 @@ is_string = lambda var: isinstance(var, (str))
 class CoreFlask():
     """
     """
-    version = '1.0.8'
+    version = '1.0.10'
     _p = None           # CorePerformance
     session = None      # CoreSession
     system = None       # CoreSystem

@@ -1,15 +1,5 @@
-from flask import request, jsonify
-
-class API():
-
-    core = None
-
-    def __init__(self,core):
-        self.core = core
+from cloudframework.RESTFul import RESTFul
+class API(RESTFul):
 
     def main(self):
-
-        res = {
-            "not-found": ":("
-        }
-        return jsonify(res)
+        return self.setErrorFromCodeLib('not-found', 'The following api route does not exist: /'+self.core.system.url['parts'][0])

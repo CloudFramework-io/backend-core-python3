@@ -41,9 +41,9 @@ class RESTFul():
         self.returnData['success'] = True;
         self.returnData['status'] = 200;
         self.returnData['code'] = 'ok';
-        self.returnData['url'] = self.core.system.url['host_url_uri']
-        self.returnData['method'] = self.method
-        self.returnData['ip'] = '127.0.0.1'
+        # self.returnData['url'] = self.core.system.url['host_url_uri']
+        # self.returnData['method'] = self.method
+        # self.returnData['ip'] = '127.0.0.1'
 
         # add basic error code
         self.addCodeLib('ok', 'OK', 200)
@@ -71,6 +71,13 @@ class RESTFul():
 
         if request.json:
             self.formParams.update(request.json)
+
+        # params
+        api_url = self.core.system.url['url'].replace(self.core.config.get('core_api_url'), '', 1)
+        self.params = api_url.split('/')
+        self.params.pop(0)
+        self.params.pop(0)
+        if len(self.params) > 0 and not(self.params[0]): self.params.pop(0)
 
     def init(self,method,handler):
         self.method = request.method;
@@ -139,7 +146,8 @@ class RESTFul():
 
     def setErrorFromCodeLib(self,code,extramsg=''):
         if is_array(extramsg): extramsg = ": "+json.dumps(extramsg)
-        self.addError("["+str(self.getCodeLibError(code))+": "+code+"] "+self.getCodeLib(code)+extramsg,self.getCodeLibError(code),code)
+        message = extramsg if extramsg else self.getCodeLib(code)
+        self.addError("["+str(self.getCodeLibError(code))+": "+code+"] "+message,self.getCodeLibError(code),code)
         pass
 
     def send(self):
