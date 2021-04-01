@@ -41,4 +41,7 @@ if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
     # can be configured by adding an `entrypoint` to app.yaml.
+    print(" * You can go to: http://localhost:8080/_version")
+    print(" * Also visit: https://www.notion.so/cloudframework/appengine-python3-core21-1-0-8-16701417fc064283affbac2f0dd16151")
     app.run(host='127.0.0.1', port=8080, debug=True)
+
