@@ -12,7 +12,7 @@ copyfile(this_script_path+'/main.py', doc_root+'/main.py')
 """
 Requirements
 """
-f = open(doc_root+"/requeriments.txt", "w")
+f = open(doc_root+"/requirements.txt", "w")
 f.write("cloudframework")
 f.close()
 
