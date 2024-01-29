@@ -16,10 +16,10 @@ source ~/.zshrc
 
 # verify version
 python --version
-[Python 3.9.2]
+[Python 3.11.5]
 
 pip --version
-[pip 21.0.1 from /usr/local/lib/python3.9/site-packages/pip (python 3.9)]
+[pip 23.3.2]
 ```
 
 ## Creating you development environment
@@ -44,7 +44,7 @@ pip install cloudframework
 
 copy the basic files to start working with your APIs developed in python
 ```
-cp env/lib/python3.9/site-packages/cloudframework/python-dist/main.py .
+cp env/lib/python3.11/site-packages/cloudframework/python-dist/main.py .
 ```
 
 Now you have the following structure of files:
