@@ -69,8 +69,9 @@ class RESTFul():
         if request.form:
             self.formParams.update(request.form)
 
-        if request.json:
-            self.formParams.update(request.json)
+        if request.content_type=='application/json':
+            if request.json:
+                self.formParams.update(request.json)
 
         # params
         api_url = self.core.system.url['url'].replace(self.core.config.get('core_api_url'), '', 1)

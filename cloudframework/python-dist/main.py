@@ -1,20 +1,14 @@
-# Copyright 2018 Google LLC
+# CLOUDFRAMEOWRK.io Python main.py
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# This file will start you Python Server to create your company/project APIS.
+# Also it will help you to interact with our CLOUD-PLAFORM
 
 
+import os
 from flask import Flask
 from cloudframework import CoreFlask
+#from tmp import _cloudframework
+#from _cloudframework import CoreFlask
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
@@ -22,26 +16,27 @@ from cloudframework import CoreFlask
 app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST","PUT","DELETE","OPTIONS","DISPATCH"])
-def main1():
+def main_root():
     # Catch every route
     # Create the object core
-    core = CoreFlask()
+    core = CoreFlask(app,os.path.dirname(os.path.abspath(__file__)))
     return core.dispatch()
 
 @app.route('/<path:path>', methods=["GET", "POST","PUT","DELETE","OPTIONS","DISPATCH"])
 def main(path):
     # Catch every route
     # Create the object core
-    core = CoreFlask()
+
+    core = CoreFlask(app,os.path.dirname(os.path.abspath(__file__)))
     return core.dispatch()
-
-
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
     # can be configured by adding an `entrypoint` to app.yaml.
-    print(" * You can go to: http://localhost:8080/_version")
-    print(" * Also visit: https://www.notion.so/cloudframework/appengine-python3-core21-1-0-8-16701417fc064283affbac2f0dd16151")
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    # Flask's development server will automatically serve static files in
+    # the "static" directory. See:
+    # http://flask.pocoo.org/docs/1.0/quickstart/#static-files. Once deployed,
+    # App Engine itself will serve those files as configured in app.yaml.
 
+    app.run(host='127.0.0.1', port=8080, debug=True)

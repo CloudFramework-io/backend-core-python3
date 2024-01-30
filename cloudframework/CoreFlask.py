@@ -8,7 +8,8 @@ is_string = lambda var: isinstance(var, (str))
 class CoreFlask():
     """
     """
-    version = '1.0.12'
+    version = '1.0.13'  # Version updated 2024-01-29 1
+    app = None          # Flask app sent from main.py
     _p = None           # CorePerformance
     session = None      # CoreSession
     system = None       # CoreSystem
@@ -24,7 +25,8 @@ class CoreFlask():
     localization = None # CoreLocalization
     model = None        # CoreModel
 
-    def __init__(self,root_path=''):
+    def __init__(self,app,root_path=''):
+        self.app = app
         self._p = CorePerformance()
 #         self.session = CoreSession()
         self.system = CoreSystem(root_path)
@@ -45,27 +47,46 @@ class CoreFlask():
         return None
 
     def dispatch(self):
-        """Return a friendly HTTP greeting."""
+        """Return a friendly HTTP response."""
 
+        #region SET [script_path] && [module_path]
         # Evaluate if the route is API path based on core_api_url
         file = '_version' if self.system.url['parts'][0] == "" else self.system.url['parts'][0]
 
         if file[0] == '_':
-            script = os.path.dirname(__file__)+"/api/"+file+".py"
+            script_path = os.path.dirname(__file__)+"/api/"+file+".py"
             module_path = "cloudframework.api."+file
         else:
-            script = self.system.root_path+"/api/"+file+".py"
+            script_path = self.system.root_path+"/api/"+file+".py"
             module_path = "api."+file
+        #endregion
 
-        if not os.path.isfile(script):
-            file = '_notfound'
-            module_path = "cloudframework.api."+file
+        #region EVALUATE if not os.path.isfile(script_path) then return 404
+        if not os.path.isfile(script_path):
+            response = self.app.response_class(
+                response=json.dumps({
+                    "success":False,
+                    "status":404,
+                    "code":"endpoint-not-found",
+                    "module":module_path
+                }),
+                status=404,
+                mimetype='application/json'
+            )
+            return response
+        #endregion
 
+        #region CREATE [api = module.API(self)] where [module = __import__(module_path,..)]
         module = __import__(module_path, globals(), locals(), ['API'], 0)
         # create the api object
+
         api = module.API(self)
+        #endregion
+
+        #region EXECUTE [api.main()] and return [api.send()]
         api.main()
         return api.send()
+        #endregion
 
 class CoreSystem:
     """
