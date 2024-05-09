@@ -4,14 +4,14 @@ CloudFramework for Appengine using python language.
 
 ## REQUIREMENTS:
 
-1. Install Python3: https://cloud.google.com/python/docs/setup#installing_python
-2. Add to your path: /usr/local/opt/python@3.9/libexec/bin
+1. Install Python3 (min version 3.11): https://cloud.google.com/python/docs/setup#installing_python
+2. Add to your path (change for your version): /usr/local/opt/python@3.11/libexec/bin
 3. Verify version
 
 Example for MAC environment
 ```
 # Add path of python
-echo 'export PATH="/usr/local/opt/python@3.9/libexec/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/python@3.11/libexec/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 # verify version
@@ -42,9 +42,9 @@ install cloudframework library
 pip install cloudframework
 ```
 
-copy the basic files to start working with your APIs developed in python
+copy the basic files to start working with your APIs developed in python, remamber change the version of your python version
 ```
-cp env/lib/python3.11/site-packages/cloudframework/python-dist/main.py .
+cp env/lib/python3.10/site-packages/cloudframework/python-dist/main.py .
 ```
 
 Now you have the following structure of files:
