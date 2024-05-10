@@ -2,6 +2,7 @@ from collections import OrderedDict
 import json
 import logging
 from flask import request, Response, jsonify
+from flask_cors import CORS
 
 
 
@@ -22,6 +23,7 @@ class RESTFul():
     contentTypeReturn = 'JSON'
     codeLib = None
     codeLibError = None
+    headers = {'content-type': 'application/json'}
 
     def __init__(self,core):
         self.core = core
@@ -108,6 +110,23 @@ class RESTFul():
         self.params.pop(0)
         if len(self.params) > 0 and not(self.params[0]): self.params.pop(0)
 
+
+    def sendCorsHeaders(self,methods='GET,POST,PUT',extra_allow_header=""):
+
+        if self.method in (methods):
+            self.headers['Access-Control-Allow-Origin'] = '*'
+            self.headers['Access-Control-Allow-Methods'] = methods
+            allow_headers = "Content-Type,Authorization,X-Requested-With,cache-control,X-CloudFrameWork-AuthToken,X-CLOUDFRAMEWORK-SECURITY,X-DS-TOKEN,X-REST-TOKEN,X-EXTRA-INFO,X-WEB-KEY,X-SERVER-KEY,X-REST-USERNAME,X-REST-PASSWORD,X-APP-KEY,X-DATA-ENV"
+            if extra_allow_header:
+                allow_headers=f"{allow_headers},{extra_allow_header}"
+            self.headers['Access-Control-Allow-Headers'] = allow_headers
+            self.headers['Access-Control-Allow-Credentials'] = "true"
+            self.headers['Access-Control-Max-Age'] = "1000"
+            return self.method != "OPTIONS"
+        else:
+            return False
+
+
     def addReturnData(self,value):
         if 'data' not in self.returnData.keys():
             self.setReturnData(value)
@@ -170,7 +189,7 @@ class RESTFul():
         if '_p' in self.formParams.keys():
             self.returnData['_p'] = self.core._p.data;
 
-        return Response(json.dumps(self.returnData),status=self.status,headers={'content-type': 'application/json'})
+        return Response(json.dumps(self.returnData),status=self.status,headers=self.headers)
 
 
         # sending output

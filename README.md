@@ -10,16 +10,24 @@ CloudFramework for Appengine using python language.
 
 Example for MAC environment
 ```
-# Add path of python
-echo 'export PATH="/usr/local/opt/python@3.11/libexec/bin:$PATH"' >> ~/.zshrc
+# install last library of xcode
+xcode-select --install
+
+# Install pyenv to work with different versions of python
+brew install pyenv
+
+# Install version 3.12
+pyenv install 3.12
+
+echo 'export PATH="/usr/local/opt/python@3.12/libexec/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 # verify version
 python --version
-[Python 3.11.5]
+[Python 3.12.3]
 
 pip --version
-[pip 23.3.2]
+[pip 24.0]
 ```
 
 ## Creating you development environment
@@ -44,7 +52,7 @@ pip install cloudframework
 
 copy the basic files to start working with your APIs developed in python, remamber change the version of your python version
 ```
-cp env/lib/python3.10/site-packages/cloudframework/python-dist/main.py .
+python env/lib/python3.12/site-packages/cloudframework/python-dist/install.py
 ```
 
 Now you have the following structure of files:

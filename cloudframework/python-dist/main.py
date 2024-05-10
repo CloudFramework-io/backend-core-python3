@@ -5,10 +5,8 @@
 
 
 import os
-from flask import Flask
+from flask import Flask,request,Response
 from cloudframework import CoreFlask
-#from tmp import _cloudframework
-#from _cloudframework import CoreFlask
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
@@ -17,15 +15,19 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST","PUT","DELETE","OPTIONS","DISPATCH"])
 def main_root():
-    # Catch every route
-    # Create the object core
+    # Catch OPTIONS calls
+    if request.method == "OPTIONS":
+        return Response()
+
     core = CoreFlask(app,os.path.dirname(os.path.abspath(__file__)))
     return core.dispatch()
 
 @app.route('/<path:path>', methods=["GET", "POST","PUT","DELETE","OPTIONS","DISPATCH"])
 def main(path):
-    # Catch every route
-    # Create the object core
+
+    # Catch OPTIONS calls
+    if request.method == "OPTIONS":
+        return Response()
 
     core = CoreFlask(app,os.path.dirname(os.path.abspath(__file__)))
     return core.dispatch()

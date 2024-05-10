@@ -8,7 +8,7 @@ is_string = lambda var: isinstance(var, (str))
 class CoreFlask():
     """
     """
-    version = '1.0.13'  # Version updated 2024-01-29 1
+    version = '1.0.14'  # Version updated 2024-05-10 1
     app = None          # Flask app sent from main.py
     _p = None           # CorePerformance
     session = None      # CoreSession
@@ -46,6 +46,9 @@ class CoreFlask():
 #         self._p.add('Loaded security,user,config,request,localization,model objects with __session[started=false')
         return None
 
+    """
+    Handle the response
+    """
     def dispatch(self):
         """Return a friendly HTTP response."""
 
